@@ -2,7 +2,7 @@
   "name": "mongo-scraper",
   "version": "1.0.0",
   "description": "Mongo Scraper\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[DNews Scraper",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
