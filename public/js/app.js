@@ -72,9 +72,10 @@ $(document).on("click", "#savenote", function () {
 });
 
 $(document).on("click", ".button_delete", function () {
+    location.reload(true);
     $.ajax({
         type: 'DELETE',
-        url: '/',
+        url: '/delete',
         success: function () {
             console.log('Err!');
         }
