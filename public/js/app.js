@@ -74,7 +74,7 @@ $(document).on("click", "#savenote", function () {
 $(document).on("click", ".button_delete", function () {
     location.reload(true);
     $.ajax({
-        type: 'DELETE',
+        type: 'GET',
         url: '/delete',
         success: function () {
             console.log('Err!');
