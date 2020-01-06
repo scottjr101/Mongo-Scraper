@@ -9,12 +9,16 @@ var db = require("../models");
 module.exports = function (app, axios, cheerio) {
 
     app.get('/', function (req, res) {
+        res.render("index");
+    });
+
+    app.get('/delete', function (req, res) {
         db.Article.deleteMany({}, function(err) {
             if (err) {
                 console.log(err)
             }
         });
-        res.render("index");
+        res.send("database cleared");
     });
 
     app.get("/scrape", function (req, res) {
