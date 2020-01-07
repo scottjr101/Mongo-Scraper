@@ -30,8 +30,6 @@ module.exports = function (app, axios, cheerio) {
                 // Save the text of the element in a "title" variable
                 var title = $(element).find('a').text();
 
-                // In the currently selected element, look at its child elements (i.e., its a-tags),
-                // then save the values for any "href" attributes that the child elements may have
                 var link = $(element).find('a').attr("href");
 
                 // Save these results in an object that we'll push into the results array we defined earlier
@@ -40,16 +38,16 @@ module.exports = function (app, axios, cheerio) {
                     link: link
                 });
 
-                db.Article.create(results)
-                    .then(function (dbArticle) {
-                        // View the added result in the console
-                        console.log(dbArticle);
-                    })
-                    .catch(function (err) {
-                        // If an error occurred, log it
-                        //   console.log(err);
-                    });
+            });
 
+            db.Article.create(results)
+            .then(function (dbArticle) {
+                // View the added result in the console
+                console.log(dbArticle);
+            })
+            .catch(function (err) {
+                // If an error occurred, log it
+                console.log(err);
             });
 
             // Log the results once you've looped through each of the elements found with cheerio
