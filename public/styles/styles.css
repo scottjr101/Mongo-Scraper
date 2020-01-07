@@ -3,7 +3,7 @@
 }
 
 body {
-    background-color: wheat;
+    background: url("../img/light-grey-terrazzo.png");
 }
 #articles {
     padding-left: 5px;
