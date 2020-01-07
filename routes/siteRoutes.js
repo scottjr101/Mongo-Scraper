@@ -22,10 +22,10 @@ module.exports = function (app, axios, cheerio) {
     });
 
     app.get("/scrape", function (req, res) {
-        axios.get("https://old.reddit.com/r/worldnews/").then(function (response) {
+        axios.get("https://text.npr.org/t.php?tid=1001").then(function (response) {
             var $ = cheerio.load(response.data);
             var results = [];
-            $("p.title").each(function (index, element) {
+            $("li").each(function (index, element) {
 
                 // Save the text of the element in a "title" variable
                 var title = $(element).find('a').text();
