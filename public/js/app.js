@@ -85,3 +85,14 @@ $(document).on("click", ".button_delete", function () {
         }
     });
 });
+
+$(document).on("click", ".button_scraper", function () {
+    location.reload(true);
+    $.ajax({
+        type: 'GET',
+        url: '/scrape',
+        success: function () {
+            console.log('Err!');
+        }
+    });
+});
