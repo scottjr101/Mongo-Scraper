@@ -1,7 +1,8 @@
 // Connect to the Mongo DB
 var mongoose = require("mongoose");
-mongoose.connect("mongodb://192.168.99.100/MongoScraper", {
-    useNewUrlParser: true
+mongoose.connect("mongodb://192.168.99.100/MongoScraper", { 
+    useNewUrlParser: true,
+    useUnifiedTopology: true 
 });
 
 var db = require("../models");
@@ -11,6 +12,8 @@ module.exports = function (app, axios, cheerio) {
     app.get('/', function (req, res) {
         res.render("index");
     });
+
+
 
     app.get('/delete', function (req, res) {
         db.Article.deleteMany({}, function(err) {
@@ -28,7 +31,11 @@ module.exports = function (app, axios, cheerio) {
             $("li").each(function (index, element) {
 
                 // Save the text of the element in a "title" variable
-                var title = $(element).find('a').text();
+                var title = $(element).find('a').text().trim();
+
+                if (title === ('Contact Us')) {
+                    return false;
+                }
 
                 var link = $(element).find('a').attr("href");
 
@@ -43,7 +50,7 @@ module.exports = function (app, axios, cheerio) {
             db.Article.create(results)
             .then(function (dbArticle) {
                 // View the added result in the console
-                console.log(dbArticle);
+                // console.log(dbArticle);
             })
             .catch(function (err) {
                 // If an error occurred, log it
@@ -51,7 +58,7 @@ module.exports = function (app, axios, cheerio) {
             });
 
             // Log the results once you've looped through each of the elements found with cheerio
-              console.log(results);
+            //   console.log(results);
             // Send a message to the client
             res.redirect("/");
         });
