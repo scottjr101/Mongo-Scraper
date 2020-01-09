@@ -21,7 +21,7 @@ $(document).on("click", ".delete-from-saved", function (event) {
         url: "/saved/delete/" + articleId,
         type: "POST",
         success: function (response) {
-            window.location.href = "/";
+            window.location.href = "/saved";
         },
         error: function (error) {
             console.log("error" + JSON.stringify(error));
@@ -46,7 +46,7 @@ $(document).on("click", ".button_scraper", function () {
         type: 'GET',
         url: '/scrape',
         success: function () {
-            location.reload(true);
+            window.location.href = "/";
             console.log('Err!');
         }
     });
