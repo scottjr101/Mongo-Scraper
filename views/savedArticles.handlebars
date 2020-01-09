@@ -27,12 +27,14 @@
                         <br>
                         <br>
                         {{#each note}}
-                        {{debug}}
+                        {{!-- {{debug}} --}}
                         <div id="noteArea{{this._id}}">
                             <div class="row">
-                                 {{debug}}
-                                <p id="note-title">{{this.noteTitle}}</p><span><p id="note-body">{{this.noteBody}}</p></span>&emsp;
+                                 {{!-- {{debug}} --}}
                                 <button class="btn btn-danger btn-sm note-delete" id="{{this._id}}">X</button>
+                                    <p id="note-title">{{this.ntitle}}</p>
+                                    <p id="note-body">{{this.nbody}}</p>
+                                
                             </div>
                         </div>
                         {{/each}}
