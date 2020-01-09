@@ -1,4 +1,4 @@
-
+// When the saved button is clicked an article is saved 
 $(document).on("click", ".save", function (event) {
     event.preventDefault();
     var articleId = $(this).attr("data-id");
@@ -13,7 +13,7 @@ $(document).on("click", ".save", function (event) {
         }
     });
 });
-
+// 
 $(document).on("click", ".delete-from-saved", function (event) {
     event.preventDefault();
     var articleId = $(this).attr("data-id");
@@ -28,31 +28,35 @@ $(document).on("click", ".delete-from-saved", function (event) {
         }
     });
 });
-
+// So when you click anywhere the class "button_delete" is added, it sends a "get" request to execute the /delete route.
+// Then it sends you back to the homepage.
 $(document).on("click", ".button_delete", function () {
-
     $.ajax({
         type: 'GET',
         url: '/delete',
         success: function () {
             window.location.href = "/";
-            console.log('Err!');
+        },
+        error: function (error) {
+            console.log(error);
         }
     });
 });
-
+// So when you click anywhere the class "button_scraper" is added, it sends a "get" request to execute the /scrape route.
+// Then it sends you back to the homepage.
 $(document).on("click", ".button_scraper", function () {
-    
     $.ajax({
         type: 'GET',
         url: '/scrape',
         success: function () {
             window.location.href = "/";
-            console.log('Err!');
+        },
+        error: function (error) {
+            console.log(error);
         }
     });
 });
-
+//
 $(document).on('click', '.add-note', function(){
     event.preventDefault();
     // var title = $(this).attr("data-title");
@@ -61,7 +65,6 @@ $(document).on('click', '.add-note', function(){
     var id = $(this).attr("data-id");
     $("#articleTitle" + id).text(title); 
 });
-
 // When the saveNote button is clicked
 $("body").on("click", ".save-note", function(event) {
     event.preventDefault();
@@ -76,8 +79,8 @@ $("body").on("click", ".save-note", function(event) {
         dataType: "json",
         url: "/save-note/" + thisId,
         data: {
-            title: $(`#noteTitleInput${thisId}`).val(),
-            body: $(`#noteBodyInput${thisId}`).val(),
+            ntitle: $(`#noteTitleInput${thisId}`).val(),
+            nbody: $(`#noteBodyInput${thisId}`).val(),
         }
     })
         // If that API call succeeds, add the title and a delete button for the note to the page 
@@ -87,7 +90,6 @@ $("body").on("click", ".save-note", function(event) {
 
         });
 });
-
 // When user clicks the delete button for a note
 $("body").on("click", ".note-delete", function(event) {
     event.preventDefault();
@@ -99,7 +101,7 @@ $("body").on("click", ".note-delete", function(event) {
     $.ajax({
         // type: "GET",
         type: "POST",
-        url: "/articles/delete/" + thisId,
+        url: "/note/delete/" + thisId,
         // url: "/delete/" + thisId,
     }).then(
         function(data) {
