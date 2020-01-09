@@ -18,12 +18,31 @@ module.exports = function (app, axios, cheerio) {
     });
 
     app.get('/delete', function (req, res) {
-        db.Article.deleteMany({}, function(err) {
+        db.Article.remove({}, function(err) {
             if (err) {
                 console.log(err)
             }
         });
         res.redirect("/");
+    });
+
+    app.post("/note/delete/:id", function(req, res) {
+        db.Note.findByIdAndRemove({ _id: req.params.id })
+            .then(function(dbNote) {
+                return db.Article.findOneAndUpdate({
+                    "note": req.params.id 
+                }, { 
+                    "$pull": { "note": req.params.id } 
+                });
+            })
+            .then(function(dbArticle) {
+                console.log("dbArticle with notes " + dbArticle);
+                res.redirect("back");
+            })
+            .catch(function(err) {
+                res.writeContinue(err);
+            });
+    
     });
 
     app.get("/scrape", function (req, res) {
