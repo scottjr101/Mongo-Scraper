@@ -7,7 +7,7 @@
                 <a class="btn mt-auto btn-light btn-outline-dark float-right save" data-id="{{this._id}}">Save Article</a></h6>
                 {{/unless}}
 
-                <a class="btn mt-auto btn-light btn-outline-dark float-right delete-from-saved" data-id="{{this._id}}">Unsave</a>
+                <button type="button" class="btn mt-auto btn-outline-dark float-right delete-from-saved" data-id="{{this._id}}">Unsave</button>
                 
                 <button type="button" data-title={{this.title}} data-id={{this._id}} class="btn mt-auto btn-light btn-outline-dark float-right add-note" data-toggle="modal" data-target="#notesModal{{this._id}}">Article Notes</button>
         

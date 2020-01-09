@@ -2,7 +2,8 @@
 var mongoose = require("mongoose");
 mongoose.connect("mongodb://192.168.99.100/MongoScraper", { 
     useNewUrlParser: true,
-    useUnifiedTopology: true 
+    useUnifiedTopology: true,
+    useFindAndModify: false 
 });
 
 var db = require("../models");
@@ -133,9 +134,25 @@ module.exports = function (app, axios, cheerio) {
             })
     })
 
+    app.post("/saved/delete/:id", function (req, res) {
+        // Create a new note and pass the req.body to the entry
+        db.Article.findOneAndUpdate({_id: req.params.id},{$set: {saved: false}})
+            .then(function (dbSaved) {
+                // If we were able to successfully update an Article, send it back to the client
+                res.json(dbSaved);
+            })
+            .catch(function (err) {
+                // If an error occurred, send it to the client
+                res.json(err);
+            })
+    })
+
     // Route for displaying all 20 saved articles, along with their notes, from the db (Saved Articles link)
     app.get("/saved", function(req, res) {
-	db.Article.find({saved: true}).sort({created: -1}).limit(20).populate("note")
+    db.Article.find({saved: true})
+        .sort({created: -1})
+        .limit(15)
+        .populate("note")
 		.then(function(article) {
 			res.render("savedArticles", { articles: article });
 		})

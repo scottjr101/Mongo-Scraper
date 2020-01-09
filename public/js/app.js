@@ -14,6 +14,21 @@ $(document).on("click", ".save", function (event) {
     });
 });
 
+$(document).on("click", ".delete-from-saved", function (event) {
+    event.preventDefault();
+    var articleId = $(this).attr("data-id");
+    $.ajax({
+        url: "/saved/delete/" + articleId,
+        type: "POST",
+        success: function (response) {
+            window.location.href = "/";
+        },
+        error: function (error) {
+            console.log("error" + JSON.stringify(error));
+        }
+    });
+});
+
 $(document).on("click", ".button_delete", function () {
     location.reload(true);
     $.ajax({
