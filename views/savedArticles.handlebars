@@ -1,0 +1,50 @@
+{{#each articles}}
+        <div class="card">
+            <div class="card-header">
+                 <h6><a class="article-link" href="https://text.npr.org{{this.link}}">{{this.title}}</a>
+
+                {{#unless saved}}
+                <a class="btn mt-auto btn-light btn-outline-dark float-right save" data-id="{{this._id}}">Save Article</a></h6>
+                {{/unless}}
+
+                <a class="btn mt-auto btn-light btn-outline-dark float-right delete-from-saved" data-id="{{this._id}}">Unsave</a>
+                
+                <button type="button" data-title={{this.title}} data-id={{this._id}} class="btn mt-auto btn-light btn-outline-dark float-right add-note" data-toggle="modal" data-target="#notesModal{{this._id}}">Article Notes</button>
+        
+            </div>
+        </div>
+
+<!-- Notes Modal -->
+   
+        {{!-- <div id="notesModal{{this._id}}" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h6 class="modal-title" id="note-header"><strong>Add note for:&nbsp;</strong>{{this.title}}</h6>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="text" id="noteTitleInput{{this._id}}" placeholder="Enter Title">&emsp;
+                        <input type="text" id="noteBodyInput{{this._id}}" placeholder="Enter Body">
+                        <br>
+                        <br>
+                        {{#each note}}
+                        {{debug}}
+                        <div id="noteArea{{this._id}}">
+                            <div class="row">
+                                 {{debug}}
+                                <p id="note-title">{{this.noteTitle}}</p><span><p id="note-body">{{this.noteBody}}</p></span>&emsp;
+                                <button class="btn btn-danger btn-sm note-delete" id="{{this._id}}">X</button>
+                            </div>
+                        </div>
+                        {{/each}}
+                    </div> 
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary save-note" data-id="{{this._id}}">Save Note</button>
+                    </div>
+                </div>
+            </div>
+        </div> --}}
+
+    {{/each}}
