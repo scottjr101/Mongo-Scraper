@@ -1,22 +1,20 @@
+
 {{#each articles}}
-        <div class="card">
+        <div class="card" id="results">
             <div class="card-header">
                  <h6><a class="article-link" href="https://text.npr.org{{this.link}}">{{this.title}}</a>
 
-                {{#unless saved}}
-                <a class="btn mt-auto btn-light btn-outline-dark float-right save" data-id="{{this._id}}">Save Article</a></h6>
-                {{/unless}}
+                 <button type="button" data-title={{this.title}} data-id={{this._id}} class="btn mt-auto btn-light btn-outline-dark add-note float-right" data-toggle="modal" data-target="#notesModal{{this._id}}">Article Notes</button>
 
-                <button type="button" class="btn mt-auto btn-outline-dark float-right delete-from-saved" data-id="{{this._id}}">Unsave</button>
-                
-                <button type="button" data-title={{this.title}} data-id={{this._id}} class="btn mt-auto btn-light btn-outline-dark float-right add-note" data-toggle="modal" data-target="#notesModal{{this._id}}">Article Notes</button>
+                <button type="button" class="btn mt-auto btn-outline-dark delete-from-saved float-right" data-id="{{this._id}}">Unsave</button></h6>
+              
         
             </div>
         </div>
 
-<!-- Notes Modal -->
+       {{!-- Notes Modal --}}
    
-        {{!-- <div id="notesModal{{this._id}}" class="modal fade" role="dialog">
+        <div id="notesModal{{this._id}}" class="modal fade" role="dialog">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -45,6 +43,7 @@
                     </div>
                 </div>
             </div>
-        </div> --}}
+        </div>
 
     {{/each}}
+   
