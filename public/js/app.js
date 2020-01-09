@@ -30,11 +30,12 @@ $(document).on("click", ".delete-from-saved", function (event) {
 });
 
 $(document).on("click", ".button_delete", function () {
-    location.reload(true);
+
     $.ajax({
         type: 'GET',
         url: '/delete',
         success: function () {
+            window.location.href = "/";
             console.log('Err!');
         }
     });
@@ -50,4 +51,60 @@ $(document).on("click", ".button_scraper", function () {
             console.log('Err!');
         }
     });
+});
+
+$(document).on('click', '.add-note', function(){
+    event.preventDefault();
+    // var title = $(this).attr("data-title");
+    var title = $(this).data("title");
+    console.log(title);
+    var id = $(this).attr("data-id");
+    $("#articleTitle" + id).text(title); 
+});
+
+// When the saveNote button is clicked
+$("body").on("click", ".save-note", function(event) {
+    event.preventDefault();
+    // Grab the id associated with the article from the Save Note button and put it in thisId
+    var thisId = $(this).attr("data-id");
+    console.log("thisId: " + thisId);
+
+    // AJAX POST call to the submit route on the server
+    // This will take the data from the form and send it to the server
+    $.ajax({
+        type: "POST",
+        dataType: "json",
+        url: "/save-note/" + thisId,
+        data: {
+            title: $(`#noteTitleInput${thisId}`).val(),
+            body: $(`#noteBodyInput${thisId}`).val(),
+        }
+    })
+        // If that API call succeeds, add the title and a delete button for the note to the page 
+        .then(function(dbArticle) {
+            location.reload();
+            // window.location.href = "/articles/saved/";
+
+        });
+});
+
+// When user clicks the delete button for a note
+$("body").on("click", ".note-delete", function(event) {
+    event.preventDefault();
+    // var thisId = $(this).attr("data-id");
+    var thisId = $(event.target).attr("id");
+    console.log("Delete on click event - thisID: " + thisId);
+    
+    // Make an AJAX GET request to delete the specific note
+    $.ajax({
+        // type: "GET",
+        type: "POST",
+        url: "/articles/delete/" + thisId,
+        // url: "/delete/" + thisId,
+    }).then(
+        function(data) {
+            console.log("data" + data);
+            location.reload();
+        }
+    );
 });
