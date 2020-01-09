@@ -4,7 +4,7 @@ body {
 #articles {
     padding-left: 5px;
 }
-.button_scraper {
+.button_scraper, .delete-from-saved {
     margin-right: 1rem;
 }
 #notes {
@@ -13,4 +13,11 @@ body {
 }
 #results {
     margin-top: 1rem;
+}
+.carousel, .card {
+    -webkit-box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 10px 13px -7px #000000, 5px 11px 15px 5px rgba(0, 0, 0, 0.25);
+}
+#note-title, #note-body {
+    margin: 0.35rem 0.5rem 0.35rem 0.5rem;
 }
