@@ -24,7 +24,7 @@ module.exports = function (app, axios, cheerio) {
     });
 
     app.get('/delete', function (req, res) {
-        db.Article.remove({}, function(err) {
+        db.Article.deleteMany({}, function(err) {
             if (err) {
                 console.log(err)
             }
