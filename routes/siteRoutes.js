@@ -17,7 +17,10 @@ module.exports = function (app, axios, cheerio) {
         db.Article.find({}).sort({created: -1}).limit(15)
 		.then(function(article) {
             res.render("index", { articles: article });
-        });    
+        })
+        .catch(function(err) {
+			res.writeContinue(err);
+		});    
     });
 
     app.get('/delete', function (req, res) {
