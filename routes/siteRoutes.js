@@ -1,6 +1,9 @@
 // Connect to the Mongo DB
+require('dotenv').config()
 var mongoose = require("mongoose");
-mongoose.connect("mongodb://192.168.99.100/MongoScraper", { 
+// MongoDB connection setup
+var Mongo_URI = process.env.mongoURI || "mongodb://192.168.99.100/MongoScraper";
+mongoose.connect(Mongo_URI, { 
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false 
@@ -28,13 +31,10 @@ module.exports = function (app, axios, cheerio) {
 
     app.post("/note/delete/:id", function(req, res) {
         db.Note.findByIdAndRemove({ _id: req.params.id })
-            .then(function(dbNote) {
-                return db.Article.findOneAndUpdate({
-                    "note": req.params.id 
-                }, { 
-                    "$pull": { "note": req.params.id } 
-                });
-            })
+            // .then(function(dbNote) {
+            //     console.log("This is what dbNote looks like => " + dbNote);
+            //     return db.Article.findOneAndUpdate({ _id : req.params.id }, { $pull: { note: dbNote._id }}, {new: false })
+            // })
             .then(function(dbArticle) {
                 console.log("dbArticle with notes " + dbArticle);
                 res.redirect("back");
@@ -126,14 +126,8 @@ module.exports = function (app, axios, cheerio) {
 	db.Note.create(req.body)
 		.then(function(dbNote) {
 
-			return db.Article.findOneAndUpdate({
-				_id: req.params.id
-			}, {
-				$push: {
-					note: dbNote._id
-				}}, {
-				new: true
-			}).populate("note");
+			return db.Article.findOneAndUpdate({ _id: req.params.id }, { $push: { note: dbNote._id }}, { new: true })
+            .populate("note");
 		})
 		// If the Article was updated successfully, send back article and its corresponding notes to the client
 		.then(function(dbArticle){
