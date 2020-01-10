@@ -7,7 +7,9 @@ mongoose.connect(Mongo_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false 
-});
+})
+.then(() => console.log("Connection Successful"))
+    .catch(err => console.log(err));
 
 var db = require("../models");
 
