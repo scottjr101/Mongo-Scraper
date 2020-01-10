@@ -87,8 +87,10 @@ $("body").on("click", ".save-note", function(event) {
         .then(function(dbArticle) {
             location.reload();
             // window.location.href = "/articles/saved/";
-
-        });
+        })
+        .catch(function(err) {
+			console.log(err);
+		});
 });
 // When user clicks the delete button for a note
 $("body").on("click", ".note-delete", function(event) {
@@ -103,10 +105,12 @@ $("body").on("click", ".note-delete", function(event) {
         type: "POST",
         url: "/note/delete/" + thisId,
         // url: "/delete/" + thisId,
-    }).then(
-        function(data) {
+    }).then(function(data) {
             console.log("data" + data);
             location.reload();
         }
-    );
+    )
+    .catch(function(err) {
+        console.log(err);
+    });
 });
