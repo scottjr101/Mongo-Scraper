@@ -44,7 +44,7 @@ module.exports = function (app, axios, cheerio) {
                 res.redirect("back");
             })
             .catch(function(err) {
-                res.writeContinue(err);
+                console.log(err);
             });
     
     });
@@ -139,7 +139,7 @@ module.exports = function (app, axios, cheerio) {
 			res.json({success: true});
 		})
 		.catch(function(err) {
-			res.writeContinue(err);
+			console.log(err);
 		});
 });
 
@@ -179,7 +179,7 @@ module.exports = function (app, axios, cheerio) {
 			res.render("savedArticles", { articles: article });
 		})
 		.catch(function(err) {
-			res.writeContinue(err);
+			console.log(err);
 		})
     })
 
