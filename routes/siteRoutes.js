@@ -19,17 +19,18 @@ module.exports = function (app, axios, cheerio) {
             res.render("index", { articles: article });
         })
         .catch(function(err) {
-			res.writeContinue(err);
+			console.log(err);
 		});    
     });
 
     app.get('/delete', function (req, res) {
-        db.Article.deleteMany({}, function(err) {
-            if (err) {
-                console.log(err)
-            }
-        });
-        res.redirect("/");
+        db.Article.deleteMany({})
+        .then(function() {
+			res.redirect("/");
+		}) 
+		.catch(function(err) {
+			console.log(err);
+		});
     });
 
     app.post("/note/delete/:id", function(req, res) {
