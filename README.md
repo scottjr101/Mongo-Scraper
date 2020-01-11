@@ -21,7 +21,7 @@ and these 5 Node packages: [Express](https://www.npmjs.com/package/express) | [A
 
 This App is deployed on *Heroku* [click Here](https://nprnewsscraper1.herokuapp.com/) to view it.
 
-![Eat Da Burger App](/img/scraper-screen-shot.png)
+![NPR News Scraper](./public/img/scraper-screen-shot.png)
 
 - - -
 
