@@ -5,7 +5,7 @@ var mongoose = require("mongoose");
 var Mongo_URI = process.env.mongoURI;
 mongoose.connect(Mongo_URI, { 
     useNewUrlParser: true,
-    connectTimeoutMS: 5000,
+    useUnifiedTopology: true,
     useFindAndModify: false 
 })
 .then(() => console.log("Connection Successful"))
