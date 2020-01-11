@@ -2,7 +2,7 @@
 require('dotenv').config()
 var mongoose = require("mongoose");
 // MongoDB connection setup
-var Mongo_URI = process.env.mongoURI || "mongodb://192.168.99.100/MongoScraper";
+var Mongo_URI = process.env.mongoURI;
 mongoose.connect(Mongo_URI, { 
     useNewUrlParser: true,
     connectTimeoutMS: 5000,
